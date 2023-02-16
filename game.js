@@ -1,7 +1,23 @@
 //controla a rodada, iniciando a primeira rodada
 var rodada = 1;
-//
 var matriz_jogo = Array(3);
+
+matriz_jogo[a] = Array(3);
+matriz_jogo[b] = Array(3);
+matriz_jogo[c] = Array(3);
+
+//primeria linha
+matriz_jogo[a][1] = '';
+matriz_jogo[a][2] = '';
+matriz_jogo[a][3] = '';
+//segunda linha
+matriz_jogo[b][1] = '';
+matriz_jogo[b][2] = '';
+matriz_jogo[b][3] = '';
+//terceira linha
+matriz_jogo[c][1] = '';
+matriz_jogo[c][2] = '';
+matriz_jogo[c][3] = '';
 
 
 $(document).ready(function() {
@@ -28,6 +44,7 @@ $(document).ready(function() {
 
     $('.jogada').click(function(){
         var id_campo_clicado = this.id;
+        $('#'+id_campo_clicado).off();
         jogada(id_campo_clicado);
     });
 
@@ -45,6 +62,65 @@ $(document).ready(function() {
         rodada++;
 
         $('#'+id).css('background-image', icone);
+
+        var linha_coluna = id.split('-');
+
+        matriz_jogo[linha_coluna[0]][linha_coluna[1]] = ponto;
+
+        verifica_combinacao();
+    }
+
+    function verifica_combinacao () {
+        var pontos = 0;
+
+        //verifica na horizontal
+        for(var i = 1; i <= 3; i++){
+            pontos += matriz_jogo['a'][i];
+        }
+        ganhador(pontos);
+
+        pontos = 0;
+        for(var i = 1; i <= 3; i++){
+            pontos += matriz_jogo['b'][i];
+        }
+        ganhador(pontos);
+
+        pontos = 0;
+        for(var i = 1; i <= 3; i++){
+            pontos += matriz_jogo['c'][i];
+        }
+        ganhador(pontos);
+
+        //verifica na vertical
+        pontos = 0;
+        for(var j = 1; j <= 3; j++){
+            pontos += matriz_jogo['a'][j];
+            pontos += matriz_jogo['b'][j];
+            pontos += matriz_jogo['c'][j];
+
+            ganhador(pontos);
+        }
+
+        //verifica na diagonal
+        pontos = 0;
+        pontos = matriz_jogo['a'][1] + matriz_jogo['b'][2] + matriz_jogo['c'][3];
+        ganhador(pontos);
+
+        pontos = 0;
+        pontos = matriz_jogo['a'][3] + matriz_jogo['b'][2] + matriz_jogo['c'][1];
+        ganhador(pontos);
+    }
+
+    function ganhador (pontos) {
+        if(pontos == -3){
+            var jogador1 = $('#apelido_j1').val();
+            alert(jogador1 + 'é o vencedor');
+            $('.jogada').off();
+        } else if(pontos == 3){
+            var jogador12 = $('#apelido_j2').val();
+            alert(jogador2 + 'é o vencedor');
+            $('.jogada').off();
+        }
     }
 
 });
