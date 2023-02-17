@@ -2,26 +2,27 @@
 var rodada = 1;
 var matriz_jogo = Array(3);
 
-matriz_jogo[a] = Array(3);
-matriz_jogo[b] = Array(3);
-matriz_jogo[c] = Array(3);
+matriz_jogo['a'] = Array(3);
+matriz_jogo['b'] = Array(3);
+matriz_jogo['c'] = Array(3);
 
-//primeria linha
-matriz_jogo[a][1] = '';
-matriz_jogo[a][2] = '';
-matriz_jogo[a][3] = '';
+//primeira linha
+matriz_jogo['a'][1] = 0;
+matriz_jogo['a'][2] = 0;
+matriz_jogo['a'][3] = 0;
 //segunda linha
-matriz_jogo[b][1] = '';
-matriz_jogo[b][2] = '';
-matriz_jogo[b][3] = '';
+matriz_jogo['b'][1] = 0;
+matriz_jogo['b'][2] = 0;
+matriz_jogo['b'][3] = 0;
 //terceira linha
-matriz_jogo[c][1] = '';
-matriz_jogo[c][2] = '';
-matriz_jogo[c][3] = '';
+matriz_jogo['c'][1] = 0;
+matriz_jogo['c'][2] = 0;
+matriz_jogo['c'][3] = 0;
 
 
 $(document).ready(function() {
     $('#btn_play').click(function() {
+
         //verifica se o campo de inserir apelido está vazio
         if($('#inserir_j1').val() == ''){
             alert("Apelido do Jogador 1 Não Inserido!");
@@ -75,13 +76,13 @@ $(document).ready(function() {
 
         //verifica na horizontal
         for(var i = 1; i <= 3; i++){
-            pontos += matriz_jogo['a'][i];
+            pontos = pontos + matriz_jogo['a'][i];
         }
         ganhador(pontos);
 
         pontos = 0;
         for(var i = 1; i <= 3; i++){
-            pontos += matriz_jogo['b'][i];
+            pontos = pontos + matriz_jogo['b'][i];
         }
         ganhador(pontos);
 
